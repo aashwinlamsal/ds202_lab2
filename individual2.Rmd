@@ -29,9 +29,13 @@ boxplot(choco$Rating ~choco$Cocoa.Pct, xlab = "Cocoa Percentage", ylab = "Rating
 plot(choco$Rating ~choco$Cocoa.Pct, xlab = "Cocoa Percentage", ylab = "Rating", main = "Scatter Plot of Rating to Cocoa Percentage")
 ```
 
-3. 
+3. Using str() and typeof(), you're able to figure out more details behind the structure of your data and its variables. choco$Company.Location is a Factor w/ 61 levels and of type, "integer"
 
+```{r q3, echo=FALSE}
+str(choco$Company.Location)
+typeof(choco$Company.Location)
 
+```
 
 
 
