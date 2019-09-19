@@ -1,6 +1,6 @@
 ---
 title: "team"
-author: "Eric Friesth"
+author: "Eric Friesth, Aashwin Lamsal"
 date: "9/13/2019"
 output: html_document
 ---
@@ -24,20 +24,20 @@ cross_table # displays this table
 
 which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0) # this code gives us all the countries that don't have a recent review of 0
 
-france_recent = subset(recent_rating,Company.Location =='France')
-uk_recent = subset(recent_rating,Company.Location =='U.K.')
-germany_recent = subset(recent_rating,Company.Location=='Germany') # these all assign new vectors for specific countries with recent ratings
+france_recent = subset(recent_rating,Company.Location =='France') #makes a subset of the cross_table dataframe that only stores recent_ratings and company location that equal France
+uk_recent = subset(recent_rating,Company.Location =='U.K.')#makes a subset of the cross_table dataframe that only stores recent_ratings and company location that equal U.K.
+germany_recent = subset(recent_rating,Company.Location=='Germany') #makes a subset of the cross_table dataframe that only stores recent_ratings and company location that equal Germany
 
-par(mfrow=c(2,2)) # sets the scale of the graphical elements 
-color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green') 
-plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") 
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18) # This code creates a scatter plot that shows the choco ratings made by France in recent years comparing cocoa percentage and high or low rating
+par(mfrow=c(2,2)) #par is used to set graphical parameters, with mfrow telling R to draw the figures in a column by row array, specifically by rows in our case, this creates 2x2 pictures on a square plotting region
+color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green') #if else statement here determines the color for the specific points based on a rating criteria, where if the rating of a certain chocolate bar is greater than the median rating of all chocolate bars, it will be colored blue on the plot, and if the rating is below the media the color is green.
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") #creates a plot with cocoa percentages on the y-axis and review dates on the x-axis.
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18) # this creates a legend for the plot, that informs the user that High Rated chocolate bars are in blue, Low Rated chocolate bars are in green, with pch creating the plotting symbols that appear in the legend.
 
-color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red')
-plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18) 
+color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red') #if else statement here determines the color for the specific points based on a rating criteria, where if the rating of a certain chocolate bar is greater than the median rating of all chocolate bars, it will be colored purple on the plot, and if the rating is below the media the color is red.
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")  #creates a plot with cocoa percentages on the y-axis and review dates on the x-axis.
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18) # this creates a legend for the plot, that informs the user that High Rated chocolate bars are in purple, Low Rated chocolate bars are in red, with pch creating the plotting symbols that appear in the legend.
 
-color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')
-plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") 
-legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)
+color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')#if else statement here determines the color for the specific points based on a rating criteria, where if the rating of a certain chocolate bar is greater than the median rating of all chocolate bars, it will be colored orange on the plot, and if the rating is below the media the color is yellow.
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") #creates a plot with cocoa percentages on the y-axis and review dates on the x-axis.
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)# this creates a legend for the plot, that informs the user that High Rated chocolate bars are in orange, Low Rated chocolate bars are in yellow, with pch creating the plotting symbols that appear in the legend.
 ```
