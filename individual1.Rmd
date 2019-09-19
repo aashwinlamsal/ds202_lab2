@@ -1,0 +1,50 @@
+---
+title: "individual1_AashwinLamsal"
+author: "Aashwin Lamsal"
+date: "9/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+head(choco)
+```
+
+1. How are ratings distributed?
+The distribution of the ratings for the different chocolates has somewhat of a bell-curve shape, with most of the ratings being between 3 and 3.5, with outliers on both ends of the bell-curve distribution.
+
+
+```{r choco1, echo=FALSE} 
+head(choco)
+hist(choco$Rating, xlab="Ratings",  main="Histogram of Chocolate Bar ratings")
+boxplot(choco$Rating, ylab="Ratings", main="Boxplot of Chocolate Bar ratings")
+```
+
+2. Do ratings depend on the cacao percentage of the chocolate bar?
+Based on the distriubtions below, there doesn't seem to be any kind of correlation between the percentage of cocoa and the rating of the chocolate bars, with there being seemingly equal distributions of ratings for chocolate bars with cocoa percentages ranging between 64 and 80% (see boxplot).
+```{r choco2, echo=FALSE}
+head(choco)
+boxplot(choco$Rating~choco$Cocoa.Pct, xlab="Cocoa Percentage (%)", ylab="Rating", main="Boxplot of Chocolate Bar Ratings vs. Cocoa Percentage")
+plot(choco$Rating~choco$Cocoa.Pct, xlab="Cocoa Percentage (%)", ylab="Rating", main="Scatter Plot of Chocolate Bar Ratings vs. Cocoa Percentage")
+```
+
+
+3. What class is the variable representing company locations? How is this different from a 'character' variable?
+Using the str() and typeof() functions:
+```{r choco3, echo=FALSE}
+str(choco$Company.Location)
+typeof(choco$Company.Location)
+
+
+
+
+```
+The class of variable representing company locations are integers. This is different from a character variable in the way that R perceives the inputs, so while you can input numbers as characters, R won't associate them as integer types unless you specifically tell it, by using the 'L' syntax after the input you want to be an integer (ex. 2L would be read by R as an integer type whereas 2 could be a numeric or a character type).
+
+
+
