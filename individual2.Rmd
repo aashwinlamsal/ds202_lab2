@@ -1,0 +1,56 @@
+---
+title: "DS 202 - Lab 2: Exploring Chocolates"
+author: "Eric Friesth"
+date: "9/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ 
+```{r choco, echo=FALSE}
+choco = read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+head(choco)
+```
+
+## Question set
+1. The bulk of the ratings are distributed in the upper 2's, 3's, and 4's with the outliers being in the upper 4's and 5's as well as lower 2's and below. 
+
+```{r q1, echo=FALSE}
+hist(choco$Rating, xlab = "Rating", main = "Histogram of Chocolate Ratings")
+```
+
+2. Using the two following visuals, I see that there isn't a strong correlation between a chocolates rating and its cocoa percentage.
+
+```{r q2, echo=FALSE}
+boxplot(choco$Rating ~choco$Cocoa.Pct, xlab = "Cocoa Percentage", ylab = "Rating", main = "Boxplot of Ratings to Cocoa Percentage")
+plot(choco$Rating ~choco$Cocoa.Pct, xlab = "Cocoa Percentage", ylab = "Rating", main = "Scatter Plot of Rating to Cocoa Percentage")
+```
+
+3. Using str() and typeof(), you're able to figure out more details behind the structure of your data and its variables. choco$Company.Location is a Factor w/ 61 levels and of type, "integer"
+
+```{r q3, echo=FALSE}
+str(choco$Company.Location)
+typeof(choco$Company.Location)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
