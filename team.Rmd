@@ -4,8 +4,10 @@ author: "Eric Friesth, Aashwin Lamsal"
 date: "9/13/2019"
 output: html_document
 ---
-
 ```{r setup, include=FALSE}
+library(classdata)
+library(ggplot2)
+choco = read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 1 \. Run the following code line by line to figure out what it's doing. Then next to each line of code, write a comment explaining its purpose and function, including the use of any specific arguments. Comments in R are proceeded by a `#`, so that R knows not to run anything after the hashtag. 
@@ -45,39 +47,37 @@ legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yello
 
 The most apparent possible improvement to the plots would be to move the location of the legend, as it blocks some of the points in the lower righthand quadrant of the plots. Another improvement could be to have the individual ratings for each of the points appear on the plot, or at least explain the conditions behind what constitutes a high and low rating, since someone who is looking at these plots for the first time wouldn't have a clear understanding of what makes a high or low rating.
 
+3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
+``` {r, echo=FALSE}
+ggplot(choco, aes(Rating)) + geom_histogram() + facet_wrap(~Review.Date)
+```
+Overtime the number of ratings increases while the distribution of ratings remained the same (even distribution/bell curve over the rating of 3.5)
 
+4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
 
+```{r, echo=FALSE}
+ggplot(choco, aes(Rating)) + geom_bar() + facet_wrap(~Company.Location) # Based on this bar chart, we determined that the top three rated company locations are "U.S.A.", "France", and "Canada"
+print("USA:")
+length(which(choco$Company.Location=='U.S.A.'))
+print("France:")
+length(which(choco$Company.Location=='France'))
+print("Canada:")
+length(which(choco$Company.Location=='Canada'))
+print("UK:")
+length(which(choco$Company.Location=='U.K.')) # by comparing the lengths of the top 4 countries we observed in our plot, we found that US, France, Canada, and the UK had the most entries but the US, France, and Canada had to the top 3
 
+```
 
+5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
+What are the entries that have a rating of 4.0 or greater?
 
+6 \. Bonus points (optional): Answer the question from the dataset.
+```{r, echo=FALSE}
+choco_top = subset(choco, Rating>=4) # This subset extracts all the rows that contain a choco rating of greater than 3.5, considering them a "top rated" company
+choco_top
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
