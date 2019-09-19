@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-1 \.
+1 \. Run the following code line by line to figure out what it's doing. Then next to each line of code, write a comment explaining its purpose and function, including the use of any specific arguments. Comments in R are proceeded by a `#`, so that R knows not to run anything after the hashtag. 
 
 ```{r, eval=FALSE}
 recent_rating = choco[choco$Review.Date>2011,] # Assigns a data.frame of chocolate reviews newer than 2011 as 'recent_rating'
@@ -41,3 +41,43 @@ color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange',
 plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") #creates a plot with cocoa percentages on the y-axis and review dates on the x-axis.
 legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)# this creates a legend for the plot, that informs the user that High Rated chocolate bars are in orange, Low Rated chocolate bars are in yellow, with pch creating the plotting symbols that appear in the legend.
 ```
+2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement.
+
+The most apparent possible improvement to the plots would be to move the location of the legend, as it blocks some of the points in the lower righthand quadrant of the plots. Another improvement could be to have the individual ratings for each of the points appear on the plot, or at least explain the conditions behind what constitutes a high and low rating, since someone who is looking at these plots for the first time wouldn't have a clear understanding of what makes a high or low rating.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
