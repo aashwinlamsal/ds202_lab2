@@ -8,23 +8,36 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+1 \.
 
-## R Markdown
+```{r, eval=FALSE}
+recent_rating = choco[choco$Review.Date>2011,] # Assigns a data.frame of chocolate reviews newer than 2011 as 'recent_rating'
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 54 countries printed but 61 levels
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location) # This drops unused levels factors from a data frame
 
-```{r cars}
-summary(cars)
+head(recent_rating) # shows us the first 6 records of the new 'recent_rating' of choco
+
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location) # Creates a table consisting of the count of reviews by country within the recent ratings (>2011)
+cross_table # displays this table
+
+which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0) # this code gives us all the countries that don't have a recent review of 0
+
+france_recent = subset(recent_rating,Company.Location =='France')
+uk_recent = subset(recent_rating,Company.Location =='U.K.')
+germany_recent = subset(recent_rating,Company.Location=='Germany') # these all assign new vectors for specific countries with recent ratings
+
+par(mfrow=c(2,2)) # sets the scale of the graphical elements 
+color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green') 
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18) # This code creates a scatter plot that shows the choco ratings made by France in recent years comparing cocoa percentage and high or low rating
+
+color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red')
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18) 
+
+color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
